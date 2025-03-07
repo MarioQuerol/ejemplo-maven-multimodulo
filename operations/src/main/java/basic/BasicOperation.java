@@ -1,4 +1,7 @@
 package basic;
 
-public interface BasicOperation {
+public interface BasicOperation<T> {
+	public T operation(T a, T b);
+
+	public String getOperationId();
 }
