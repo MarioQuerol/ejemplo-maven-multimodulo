@@ -46,7 +46,7 @@ public class CalculatorService {
 					operar("sum");
 					break;
 				case MenuOption.CONCATENATE:
-					operar("concat");
+					operarString("concat");
 					break;
 				default:
 					console.printError("Invalid option");
@@ -66,6 +66,18 @@ public class CalculatorService {
 			console.print("The result is: " + operations.get(operation).operation(a, b));
 		} catch (NumberFormatException e) {
 			console.printError("Numero introducido invalido");
+		} catch (Exception e) {
+			console.printError("Error desconocido. Intente de nuevo");
+		}
+	}
+
+	private void operarString(String operation) {
+		try {
+			console.print("Enter the first string:");
+			String a = console.readLine();
+			console.print("Enter the second string:");
+			String b = console.readLine();
+			console.print("The result is: " + operations.get(operation).operation(a, b));
 		} catch (Exception e) {
 			console.printError("Error desconocido. Intente de nuevo");
 		}

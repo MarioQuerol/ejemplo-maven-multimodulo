@@ -25,15 +25,11 @@ public class Console {
 		System.out.println("4. Exit");
 		System.out.print("Option: ");
 
-		return MenuOption.fromValue(readInt());
+		return MenuOption.fromValue(Integer.parseInt(readLine()));
 	}
 
 	public String readLine() {
 		return scanner.nextLine();
-	}
-
-	public Integer readInt() {
-		return scanner.nextInt();
 	}
 
 	public void closeScanner() {
