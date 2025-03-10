@@ -20,4 +20,80 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <profiles>
+        <!-- Perfil 1: Usa Maven Repository, JDK 19, Driver BBDD 1, y excluye resources/prof1 -->
+        <profile>
+            <id>profile-maven-repo</id>
+            <activation>
+                <property>
+                    <name>activateProfile</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>maven-repository</id>
+                    <url>https://repo1.maven.org/maven2/</url>
+                </repository>
+            </repositories>
+            <properties>
+                <maven.compiler.source>19</maven.compiler.source>
+                <maven.compiler.target>19</maven.compiler.target>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.database</groupId>
+                    <artifactId>db-driver-1</artifactId>
+                    <version>1.0.0</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>prof1/**</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+        <!-- Perfil 2: Usa Spring Repo, JDK 17, Driver BBDD 2, y excluye archivos con regex -->
+        <profile>
+            <id>profile-spring-repo</id>
+            <activation>
+                <file>
+                    <exists>src/main/resources/activate-profile2.txt</exists>
+                </file>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>spring-repository</id>
+                    <url>https://repo.spring.io/release</url>
+                </repository>
+            </repositories>
+            <properties>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.database</groupId>
+                    <artifactId>db-driver-2</artifactId>
+                    <version>2.0.0</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>prof2/.*\.properties</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
 </project>
